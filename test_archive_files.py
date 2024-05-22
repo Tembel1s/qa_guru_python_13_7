@@ -22,6 +22,8 @@ def test_pdf():
 
 def test_xlsx():
     with zipfile.ZipFile('content_folder/archive_folder/archive.zip') as zip_file:
-        page = load_workbook(zip_file.open('xlsx')).active
-        assert 'OU001' in page.cell(row=2, column=1).value
-        assert 'Коммерческий департамент' in page.cell(row=2, column=3).value
+        with zip_file.open('xlsx') as xlsx_file:
+            workbook = load_workbook(xlsx_file)
+            sheet = workbook.active
+            assert 'OU001' in sheet.cell(row=2, column=1).value
+            assert 'Коммерческий департамент' in sheet.cell(row=2, column=3).value

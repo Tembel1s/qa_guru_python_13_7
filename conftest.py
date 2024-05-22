@@ -29,7 +29,6 @@ def download_xlsx():
     with open(file_path, "wb") as file:
         file.write(content)
 
-
 def download_pdf():
     browser.open("http://ru.wondershare.com/pdf-editor/form-templates.html")
     download_url = browser.element("[href='http://images.ru.wondershare.com/images/pdf-files/"
@@ -41,16 +40,14 @@ def download_pdf():
     with open(file_path, "wb") as file:
         file.write(content)
 
-
 def create_archive():
     ARCHIVE_DIR = os.path.join(CONTENT_DIR, 'archive_folder')
     if not os.path.exists(ARCHIVE_DIR):
         os.mkdir(ARCHIVE_DIR)
 #
-    with zipfile.ZipFile(os.path.join(ARCHIVE_DIR, 'archive.zip'), 'w') as zf:
-        for file in ['csv', 'xlsx', 'pdf']:
-            add_file = os.path.join('content_folder', file)
-            zf.write(add_file, os.path.basename(add_file))
+    with (zipfile.ZipFile(os.path.join(ARCHIVE_DIR, 'archive.zip'), 'w') as zf):
+        for file in os.listdir(CONTENT_DIR):
+            zf.write(os.path.join(CONTENT_DIR, file), file)
 
 
 @pytest.fixture(scope="session", autouse=True)
