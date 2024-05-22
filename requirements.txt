@@ -1,0 +1,5 @@
+pytest == 8.2.1
+selene == 2.0.0rc9
+requests == 2.32.2
+pypdf == 4.2.0
+openpyxl == 3.2.0b1
